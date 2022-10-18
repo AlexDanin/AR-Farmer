@@ -16,6 +16,7 @@ public class PlaneManager : SwitchCanvas
     private Vector2 TouchPosition;
     
     bool flag = true;
+    bool create = true;
 
     private Dictionary<string, GameObject> spawner_persons = new Dictionary<string, GameObject>();
     private Dictionary<string, GameObject> spawner_storage = new Dictionary<string, GameObject>();
@@ -57,8 +58,11 @@ public class PlaneManager : SwitchCanvas
 
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began && flag)
         {
-            Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], hits[0].pose.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
-            Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+            var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
+            var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+
+            man.name = "man";
+            box.name = "box";
 
             DiableVisual();
             flag = false;
@@ -66,6 +70,8 @@ public class PlaneManager : SwitchCanvas
             Destroy(GameObject.Find("AR Default Point Cloud"));
 
             main();
+
+            plane_marker_person.SetActive(false);
 
             /*for (int i = 1; i < 5; i++)
             {
@@ -83,8 +89,33 @@ public class PlaneManager : SwitchCanvas
 
     public void Test()
     {
-        Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, Quaternion.identity); // spawner_persons[PlayerPrefs.GetString("currency")].transform.rotation
-        Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, Quaternion.identity); // spawner_storage[PlayerPrefs.GetString("currency")].transform.rotation
+        var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
+        var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+
+        man.name = "man";
+        box.name = "box";
+        plane_marker_person.SetActive(false);
+
         main();
+    }
+
+    public void change_pers()
+    {
+        if (create)
+        {
+            Destroy(GameObject.Find("man"));
+            Destroy(GameObject.Find("box"));
+
+            var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
+            var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+
+            man.name = "man";
+            box.name = "box";
+            create = false;
+        }
+        else
+        {
+            create = true;
+        }
     }
 }

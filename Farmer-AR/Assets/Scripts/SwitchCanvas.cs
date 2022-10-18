@@ -15,7 +15,6 @@ public class SwitchCanvas : MonoBehaviour
     {
         home.SetActive(false);
         shop.SetActive(true);
-        UI.check_choose_skin();
     }
 
     public void close()

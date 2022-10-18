@@ -17,22 +17,38 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(_joystick);
-        if (!_joystick)
+        try
         {
-            init();
-        }
-        else if (_joystick)
-        {
-            _rigidbody.velocity = new Vector3(_joystick.Horizontal * _moveSpeed, _rigidbody.velocity.y, _joystick.Vertical * _moveSpeed);
-
-            if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+            if (!_joystick)
             {
-                transform.rotation = Quaternion.LookRotation(-_rigidbody.velocity);
-                _animator.SetBool("isRunning", true);
+                init();
             }
-            else
-                _animator.SetBool("isRunning", false);
+            else if (_joystick)
+            {
+                _rigidbody.velocity = new Vector3(_joystick.Horizontal * _moveSpeed, _rigidbody.velocity.y, _joystick.Vertical * _moveSpeed);
+
+                if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+                {
+                    transform.rotation = Quaternion.LookRotation(-_rigidbody.velocity);
+                    _animator.SetBool("isRunning", true);
+                }
+                else
+                    _animator.SetBool("isRunning", false);
+            }
+        }
+        catch (System.Exception)
+        {
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "objects")
+        {
+            GameMechanic.score += 1;
+            GameMechanic.obj_destroy = true;
+            Destroy(collision.gameObject);
         }
     }
 }

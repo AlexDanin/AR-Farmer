@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - currency
+  - storage
+  - objects
   layers:
   - Default
   - TransparentFX

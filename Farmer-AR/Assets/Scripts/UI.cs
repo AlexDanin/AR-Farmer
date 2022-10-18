@@ -8,34 +8,27 @@ using System;
 public class UI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] pages, people, advanture_time, cost;
+    private GameObject[] pages, cost_text;
     [SerializeField]
-    private GameObject buy_panel, not_enough_panel, shop;
+    private GameObject buy_panel, insufficient_funds;
     [SerializeField]
-    private Text how_much;
+    private Text how_mach;
     private int page = 0;
     private int money = 0;
-    private int index_person = 0;
 
-    [SerializeField]
-    private string[] persons;
-    [SerializeField]
-    private Sprite[] objects;
+    GameObject obj;
+    int cost_num = 100;
 
     void Start()
     {
-        add_skins_pp(people);
-        add_skins_pp(advanture_time);
-        check_skins(people);
-        check_skins(advanture_time);
-
         if (PlayerPrefs.GetString("choose") == "")
             PlayerPrefs.SetString("choose", "Farmer");
 
+        if (!PlayerPrefs.HasKey("money"))
+            PlayerPrefs.SetInt("money", 0);
         money = PlayerPrefs.GetInt("money");
-        turn_page();
-        change_currency();
-        update_cost();
+
+        update_money();
     }
 
     public void next_page()
@@ -59,52 +52,44 @@ public class UI : MonoBehaviour
         pages[page].transform.localPosition = new Vector3(0, pages[page].transform.localPosition.y, 0);
     }
 
-    public void buy(int i)
+    private void update_money()
     {
-        if (page == 0) {
-            if (money >= int.Parse(people[i].transform.Find("cost").GetComponent<Text>().text))
-            {
-                people[i].transform.Find("frame").gameObject.SetActive(true);
-                people[i].transform.GetComponent<Toggle>().enabled = true;
-                people[i].GetComponent<Toggle>().isOn = true;
-                index_person = i;
-                buy_panel.SetActive(true);
-            }
-            else
-            {
-                how_much.text = money.ToString() + "/" + int.Parse(people[i].transform.Find("cost").GetComponent<Text>().text).ToString();
-                not_enough_panel.SetActive(true);
-                people[i].GetComponent<Toggle>().isOn = false;
-            }
-        }
-        else if (page == 1)
-        {
-            if (money >= int.Parse(advanture_time[i].transform.Find("cost").GetComponent<Text>().text))
-            {
-                advanture_time[i].transform.Find("frame").gameObject.SetActive(true);
-                advanture_time[i].GetComponent<Toggle>().enabled = true;
-                advanture_time[i].GetComponent<Toggle>().isOn = true;
-                index_person = i;
-                buy_panel.SetActive(true);
-            }
-            else
-            {
-                how_much.text = money.ToString() + "/" + int.Parse(advanture_time[i].transform.Find("cost").GetComponent<Text>().text).ToString();
-                not_enough_panel.SetActive(true);
-                advanture_time[i].GetComponent<Toggle>().isOn = false;
-            }
-        }
-    }
-
-    private void update_cost()
-    {
-        foreach (var item in cost)
+        foreach (var item in cost_text)
         {
             item.GetComponent<Text>().text = " " + money.ToString();
         }
     }
 
+    public void buy(GameObject game)
+    {
+        if (money >= cost_num)
+        {
+            buy_panel.SetActive(true);
+            obj = game;
+        }
+        else
+        {
+            insufficient_funds.SetActive(true);
+            how_mach.text = money.ToString() + "/" + cost_num.ToString();
+        }
+    }
+
     public void yes()
+    {
+        buy_panel.SetActive(false);
+        PlayerPrefs.SetInt(obj.transform.parent.gameObject.name, 1);
+
+        money -= cost_num;
+        PlayerPrefs.SetInt("money", money);
+        update_money();
+        Destroy(obj);
+    }
+
+    public void no()
+    {
+        buy_panel.SetActive(false);
+    }
+    /*public void yes()
     {
         if (page == 0)
             making_a_purchase(people[index_person]);
@@ -127,9 +112,11 @@ public class UI : MonoBehaviour
         gameObject.transform.Find("lock").gameObject.SetActive(false);
         gameObject.transform.Find("cost").gameObject.SetActive(false);
         gameObject.transform.Find("currency").gameObject.SetActive(false);
+        gameObject.transform.Find("frame").gameObject.SetActive(true);
         gameObject.GetComponent<EventTrigger>().enabled = false;
+        gameObject.GetComponent<Toggle>().enabled = true;
         update_cost();
-        // gameObject.GetComponent<Toggle>().isOn = true;
+        gameObject.GetComponent<Toggle>().isOn = true;
     }
 
     public void no()
@@ -152,12 +139,12 @@ public class UI : MonoBehaviour
         {
             Debug.Log("404");
         } 
-        GameObject[] cur = GameObject.FindGameObjectsWithTag("currency");
-        foreach (var item in cur)
+        foreach (var item in currency)
         {
             item.GetComponent<Image>().sprite = objects[Array.IndexOf(persons, PlayerPrefs.GetString("choose"))];
             // GameObject.Find("Shop").GetComponent<ToggleGroup>().GetFirstActiveToggle().name
         }
+        Debug.Log(objects[Array.IndexOf(persons, PlayerPrefs.GetString("choose"))]);
     }
 
     private void add_skins_pp(GameObject[] skins)
@@ -187,7 +174,9 @@ public class UI : MonoBehaviour
                 img.transform.Find("lock").gameObject.SetActive(false);
                 img.transform.Find("cost").gameObject.SetActive(false);
                 img.transform.Find("currency").gameObject.SetActive(false);
+                img.transform.Find("frame").gameObject.SetActive(true);
                 img.GetComponent<EventTrigger>().enabled = false;
+                img.GetComponent<Toggle>().enabled = true;
             }
         }
     }
@@ -196,7 +185,8 @@ public class UI : MonoBehaviour
     public static void check_choose_skin()
     {
         Debug.Log(GameObject.Find(PlayerPrefs.GetString("choose")));
+        GameObject.Find(PlayerPrefs.GetString("choose")).GetComponent<Toggle>().enabled = true;
         GameObject.Find(PlayerPrefs.GetString("choose")).GetComponent<Toggle>().isOn = true;
         // change_currency();
-    }
+    }*/
 }
