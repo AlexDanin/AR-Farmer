@@ -64,12 +64,14 @@
     <Compile Include="Assets\Scripts\GameMechanic.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\FruitAnimation.cs" />
+    <Compile Include="Assets\Scripts\LookAtCam.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\Scripts\ToggleUnlock.cs" />
+    <Compile Include="Assets\Scripts\LookAt.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
     <Compile Include="Assets\Scripts\SwitchCanvas.cs" />
     <Compile Include="Assets\Scripts\PlaneManager.cs" />
-    <Compile Include="Assets\Scripts\ToggleUnlock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -25,7 +25,7 @@ public class UI : MonoBehaviour
             PlayerPrefs.SetString("choose", "Farmer");
 
         if (!PlayerPrefs.HasKey("money"))
-            PlayerPrefs.SetInt("money", 0);
+            PlayerPrefs.SetInt("money", 10000);
         money = PlayerPrefs.GetInt("money");
 
         update_money();

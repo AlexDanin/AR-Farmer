@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlaneManager : SwitchCanvas
 {
     [SerializeField] 
-    private GameObject plane_marker_person;
+    private GameObject plane_marker_person, score, nums, arrow;
     [SerializeField]
     private GameObject[] persons, storage;
 
@@ -17,9 +17,11 @@ public class PlaneManager : SwitchCanvas
     
     bool flag = true;
     bool create = true;
+    bool start = false;
 
     private Dictionary<string, GameObject> spawner_persons = new Dictionary<string, GameObject>();
     private Dictionary<string, GameObject> spawner_storage = new Dictionary<string, GameObject>();
+
 
     void Start()
     {
@@ -35,7 +37,7 @@ public class PlaneManager : SwitchCanvas
 
         ARRaycastManagerScript = FindObjectOfType<ARRaycastManager>();
 
-        plane_marker_person.SetActive(true);
+        // plane_marker_person.SetActive(false);
     }
 
     // Update is called once per frame
@@ -58,20 +60,30 @@ public class PlaneManager : SwitchCanvas
 
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began && flag)
         {
-            var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
-            var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+            var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("default").transform.position, plane_marker_person.transform.Find("default").transform.rotation);
+            var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, plane_marker_person.transform.Find("corob_marker").transform.rotation);
+
+            man.transform.localScale = plane_marker_person.transform.localScale;
+            box.transform.localScale = plane_marker_person.transform.localScale;
 
             man.name = "man";
             box.name = "box";
 
-            DiableVisual();
+            // nums.transform.parent = GameObject.Find("man").transform;
+            // arrow.transform.parent = GameObject.Find("box").transform;
+            // score.transform.parent = GameObject.Find("box").transform;
+
             flag = false;
-            GetComponent<ARPointCloudManager>().enabled = false;
-            Destroy(GameObject.Find("AR Default Point Cloud"));
+            // GetComponent<ARPointCloudManager>().enabled = false;
+            // Destroy(GameObject.Find("AR Default Point Cloud"));
+
+            // man.transform.SetParent(nums.transform);
+            
 
             main();
 
             plane_marker_person.SetActive(false);
+            start = true;
 
             /*for (int i = 1; i < 5; i++)
             {
@@ -82,40 +94,59 @@ public class PlaneManager : SwitchCanvas
         }
     }
 
-    public void DiableVisual()
-    {
-        plane_marker_person.SetActive(false);
-    }
-
     public void Test()
     {
-        var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
-        var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+        var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("default").transform.position, plane_marker_person.transform.Find("default").transform.rotation);
+        var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, plane_marker_person.transform.Find("corob_marker").transform.rotation);
+
+        man.transform.localScale = plane_marker_person.transform.localScale;
+        box.transform.localScale = plane_marker_person.transform.localScale;
 
         man.name = "man";
         box.name = "box";
+
+        // nums.transform.SetParent(GameObject.Find("man").transform);
+        // arrow.transform.SetParent(GameObject.Find("box").transform);
+        // score.transform.SetParent(GameObject.Find("box").transform);
+
         plane_marker_person.SetActive(false);
 
         main();
+
+        start = true;
     }
 
     public void change_pers()
     {
-        if (create)
+        if (start)
         {
-            Destroy(GameObject.Find("man"));
-            Destroy(GameObject.Find("box"));
+            if (create)
+            {
+                nums.transform.SetParent(null);
+                arrow.transform.SetParent(null);
+                score.transform.SetParent(null);
 
-            var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.position, spawner_persons[PlayerPrefs.GetString("choose")].transform.rotation);
-            var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+                Destroy(GameObject.Find("man"));
+                Destroy(GameObject.Find("box"));
 
-            man.name = "man";
-            box.name = "box";
-            create = false;
-        }
-        else
-        {
-            create = true;
+                var man = Instantiate(spawner_persons[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("default").transform.position, plane_marker_person.transform.Find("default").transform.rotation);
+                var box = Instantiate(spawner_storage[PlayerPrefs.GetString("choose")], plane_marker_person.transform.Find("corob_marker").transform.position, spawner_storage[PlayerPrefs.GetString("choose")].transform.rotation);
+
+                man.transform.localScale = plane_marker_person.transform.localScale;
+                box.transform.localScale = plane_marker_person.transform.localScale;
+
+                man.name = "man";
+                box.name = "box";
+
+                //nums.transform.parent = GameObject.Find("man").transform;
+                //arrow.transform.parent = GameObject.Find("box").transform;
+                //score.transform.parent = GameObject.Find("box").transform;
+                create = false;
+            }
+            else
+            {
+                create = true;
+            }
         }
     }
 }

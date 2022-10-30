@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour
     private FixedJoystick _joystick;
     [SerializeField] private Animator _animator;
 
-    private float _moveSpeed = 6;
+    private float _moveSpeed = 0.3f;
+
+    GameObject sound_apple, sound_pac;
 
     private void init()
     {
         _joystick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+        sound_apple = GameObject.Find("sound_apple");
+        sound_pac = GameObject.Find("sound_pac");
     }
 
     private void FixedUpdate()
@@ -44,11 +48,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "objects")
+        if (collision.gameObject.tag == "objects" && GameMechanic.score < 5 && !GameMechanic.obj_destroy)
         {
+            sound_apple.GetComponent<AudioSource>().Play();
+            Destroy(collision.gameObject.transform.parent.gameObject);
             GameMechanic.score += 1;
             GameMechanic.obj_destroy = true;
-            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "storage")
+        {
+            sound_pac.GetComponent<AudioSource>().Play();
+            GameMechanic.bag += GameMechanic.score;
+            GameMechanic.score = 0;
+            GameMechanic.put_to_bag = true;
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3653253114374555164}
   m_Layer: 0
   m_Name: right_leg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3653253114840281506}
   m_Layer: 0
   m_Name: left_arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 3653253114995877317}
   m_Layer: 0
   m_Name: left_leg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3653253115774853321}
   m_Layer: 0
   m_Name: right_arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,6 +343,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7bafde802d79ebf49a86bde197a9056e, type: 3}
       propertyPath: m_Name
       value: beekeeper-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7bafde802d79ebf49a86bde197a9056e, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bafde802d79ebf49a86bde197a9056e, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4240515471268414533}
   m_Layer: 0
   m_Name: right_arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4240515472324120047}
   m_Layer: 0
   m_Name: left_arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,6 +251,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 08ac816f11005274092efc402beb1a86, type: 3}
       propertyPath: m_Name
       value: bubblegum-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 08ac816f11005274092efc402beb1a86, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08ac816f11005274092efc402beb1a86, type: 3}

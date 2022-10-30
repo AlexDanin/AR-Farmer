@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class FruitAnimation : MonoBehaviour
 {
+    public bool k;
     void Update()
     {
         transform.Rotate(Vector3.up * Time.deltaTime * 50);
-        transform.position = new Vector3(transform.position.x, 0.6f + Mathf.Sin(Time.fixedTime) * 0.5f, transform.position.z);
+        if (k)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.fixedTime) * 0.002f, transform.position.z);
+        }
+        
     }
 }

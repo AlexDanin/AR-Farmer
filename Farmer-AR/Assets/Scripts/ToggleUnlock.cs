@@ -28,9 +28,14 @@ public class ToggleUnlock : MonoBehaviour
                 persons[i].isOn = true;
                 frames[i].SetActive(true);
             }
+            else
+            {
+                persons[i].isOn = false;
+                frames[i].SetActive(false);
+            }
             if (PlayerPrefs.HasKey(skins[i]))
             {
-                Destroy(persons[i].transform.parent.GetChild(1).gameObject);
+                Destroy(persons[i].transform.parent.GetChild(2).gameObject);
             }
         }
         isActivate();

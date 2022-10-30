@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c9002708f3ac246885a8c1480f1e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  k: 0
 --- !u!1 &4688500350632541503
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +56,7 @@ GameObject:
   - component: {fileID: 4586574564642860548}
   - component: {fileID: 1689384327441487694}
   - component: {fileID: 2761933872456283098}
-  - component: {fileID: 2522443625435745723}
+  - component: {fileID: 9032671496183643408}
   m_Layer: 0
   m_Name: default
   m_TagString: objects
@@ -126,8 +127,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2522443625435745723
-MeshCollider:
+--- !u!65 &9032671496183643408
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,7 +137,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: 41a66feccb0ef474d92605a95afb9cd4, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.4999999, y: 0.59999996, z: 0.8999999}
+  m_Center: {x: -0.05000001, y: 0.29999998, z: -0.049999993}

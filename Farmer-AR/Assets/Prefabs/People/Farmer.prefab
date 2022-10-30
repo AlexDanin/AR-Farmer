@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1953524098021457105}
   m_Layer: 0
   m_Name: right_leg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1953524098204882209}
   m_Layer: 0
   m_Name: left_leg
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 1953524098273388065}
   m_Layer: 0
   m_Name: left_arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1953524099406672327}
   m_Layer: 0
   m_Name: right_arm
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -418,6 +418,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9102e8a4af43343439675b12a3cd6c92, type: 3}
       propertyPath: m_Name
       value: farmer-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9102e8a4af43343439675b12a3cd6c92, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9102e8a4af43343439675b12a3cd6c92, type: 3}
